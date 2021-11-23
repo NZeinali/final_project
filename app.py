@@ -25,15 +25,15 @@ print(loadedxScaler)
 print(loadedyScaler)
 
 
-uri = os.getenv("DATABASE_URL", "")
-if uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
-app.config['SQLALCHEMY_DATABASE_URI'] = uri or "sqlite:///db.sqlite"
+# uri = os.getenv("DATABASE_URL", "")
+# if uri.startswith("postgres://"):
+#     uri = uri.replace("postgres://", "postgresql://", 1)
+# app.config['SQLALCHEMY_DATABASE_URI'] = uri or "sqlite:///db.sqlite"
 
-# Remove tracking modifications
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# # Remove tracking modifications
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy(app)
+# db = SQLAlchemy(app)
 
 
 #################################################
@@ -87,12 +87,10 @@ def send():
 
         user_input = [[bed, bath, land, floor,
                        buildYear, distCBD, sellingYear]]
+
         scaled_userinput = loadedxScaler.transform(user_input)
         prediction = loadedModel.predict(scaled_userinput)
-        # prediction = loadedModel.predict(user_input)
-
         descaled_prediction = loadedyScaler.inverse_transform(prediction)
-        print(f"Prediction: {descaled_prediction[0]}")
 
         price_predicted = int(round(descaled_prediction[0]/1000)*1000)
         prediction_dict = {"predicted_price": price_predicted}
@@ -100,7 +98,6 @@ def send():
         prediction_dict = {"prediction_price": "hit predict"}
     return render_template("machine_learning.html", dict=prediction_dict)
 
-    # return render_template("machine_learning.html")
 
 # #################################################
 

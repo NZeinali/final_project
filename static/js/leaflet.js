@@ -52,6 +52,7 @@ d3.json("/avgprice")
 
     // Grabbing our GeoJSON data..
     d3.json(geodata).then(function (data) {
+      
       // Editing geojson by adding price item
       for (var i = 0; i < data.features.length; i++) {
         for (var j = 0; j < housePrice.length; j++) {
@@ -59,49 +60,9 @@ d3.json("/avgprice")
             data.features[i].properties.wa_local_6 = housePrice[j];
           }
         }
-        // console.log(data.features[i].properties.wa_local_6);
       }
 
-      // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-      // NORMAL GEOJSON LEAFLET LAYER
-      // geojson = L.geoJson(data, {
-      //   // Style each feature (in this case a country)
-      //   style: function (feature) {
-      //     return {
-      //       color: "white",
-      //       // Call the chooseColor function to decide which color to color our country (color based on country)
-      //       fillColor: "white",
-      //       fillOpacity: 0.2,
-      //       weight: 1.5,
-      //     };
-      //   },
-      //   // Called on each feature
-      //   onEachFeature: function (feature, layer) {
-      //     // Set mouse events to change map styling
-      //     layer.on({
-      //       // When a user's mouse touches a map feature, the mouseover event calls this function, that feature's opacity changes to 90% so that it stands out
-      //       mouseover: function (event) {
-      //         layer = event.target;
-      //         layer.setStyle({
-      //           fillOpacity: 0.9,
-      //         });
-      //       },
-      //       // When the cursor no longer hovers over a map feature - when the mouseout event occurs - the feature's opacity reverts back to 50%
-      //       mouseout: function (event) {
-      //         layer = event.target;
-      //         layer.setStyle({
-      //           fillOpacity: 0.5,
-      //         });
-      //       },
-      //       // When a feature (country) is clicked, it is enlarged to fit the screen
-      //       click: function (event) {
-      //         myMap.fitBounds(event.target.getBounds());
-      //       },
-      //     });
-      //     // Giving each feature a pop-up with information pertinent to it
-      //     layer.bindPopup("<h1>" + feature.properties.name + "</h1>");
-      //   },
-      // }).addTo(myMap);
+
 
       // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
       geojson = L.choropleth(data, {
