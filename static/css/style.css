@@ -1,0 +1,127 @@
+th,
+td {
+  font-size: 14px;
+  text-align: center;
+}
+
+/* GRANIM.js */
+/* ************************************* */
+.canvas-interactive-wrapper {
+  position: relative;
+  height: 100px;
+  text-align: center;
+}
+
+.canvas-interactive-wrapper canvas {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.canvas-interactive-wrapper .cta-wrapper {
+  margin-top: auto;
+}
+
+.canvas-interactive-wrapper .cta-wrapper a {
+  position: relative;
+  display: inline-block;
+  padding: 20px 120px;
+  border: solid 1px transparent;
+  margin-right: 100px;
+  z-index: 1;
+  text-decoration: none;
+  color: #222;
+  font-size: 30px;
+  font-weight: bold;
+  transition: border 0.3s;
+}
+
+.canvas-interactive-wrapper .cta-wrapper a.active {
+  border-color: #222;
+}
+/* ************************************* */
+
+.text-slider-items {
+  display: none;
+}
+
+/* set map, body, and html to 100% of the screen size */
+#map,
+body,
+html {
+  height: 100%;
+}
+
+.wrapper {
+  width: 120px;
+  padding: 10px;
+  height: 150px;
+}
+.leaflet-popup-content {
+  text-align: center;
+}
+
+/* CSS from the Leaflet-Choropleth documentation */
+.legend {
+  padding: 6px 8px;
+  font: 12px Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #555;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.legend ul {
+  padding: 0;
+  margin: 0;
+  clear: both;
+  list-style-type: none;
+}
+
+.legend li {
+  display: inline-block;
+  width: 30px;
+  height: 22px;
+}
+
+.legend .min {
+  float: left;
+  padding-bottom: 5px;
+}
+
+.legend .max {
+  float: right;
+}
+
+h1 {
+  text-align: center;
+}
+
+
+
+
+#canvas-complex {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}

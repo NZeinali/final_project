@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Perth Property Market Analysis</title>
+
+    <!-- Our CSS stylesheet -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <!-- Bootstrap stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <!-- GRANIM -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/granim/2.0.0/granim.js"></script>
+
+    <!-- Remove favicon.ico error -->
+    <link rel="shortcut icon" href="#" />
+
+    <!-- Tabulator -->
+    <link
+      href="https://unpkg.com/tabulator-tables@5.0.0/dist/css/tabulator.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/tabulator-tables@5.0.0/dist/js/tabulator.min.js"
+    ></script>
+  </head>
+
+  <body>
+    <!-- Granim Section -->
+
+    <div class="canvas-interactive-wrapper">
+      <canvas id="canvas-interactive"></canvas>
+      <div class="cta-wrapper">
+        <a href="/" id="default-state-cta">HOME PAGE</a>
+        <a href="/marketanalysis" id="violet-state-cta">DATA VISUALISATION</a>
+        <a href="/leaflet" id="orange-state-cta">MAP</a>
+      </div>
+    </div>
+
+    <!-- ***************************************** -->
+    <!-- TYPED.js -->
+    <h1 style="margin: 20px">
+      <span class="text-slider-items">
+        Perth property market analysis!, Machine learning for home price
+        forecast!
+      </span>
+      <strong class="text-slider"></strong>
+    </h1>
+    <!-- ***************************************** -->
+    <!-- TABLE -->
+
+    <div class="container-fluid">
+      <div class="text-center">
+        <img
+          src="https://marketimages.s3.ap-southeast-2.amazonaws.com/machine.png"
+          class="rounded"
+          alt="market"
+        />
+        <h2
+          class="container-fluid"
+          style="
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+              'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            text-align: justify;
+            line-height: 50px;
+            padding: 100px;
+          "
+        >
+          The following regression models were used to train the data set and to
+          forecast the housing prices. The variables that are recognised as
+          price-influencing include, LAND AREA, FLOOR AREA, CBD DISTANCE, YEAR
+          BUILT, YEAR SOLD, number of BEDROOMS and BATHROOMS.
+          <br />
+          <br />
+          RandomForestRegression is among the machine learning algorithms that
+          has given the highest test scores. Therefore, this model is used in
+          house price forcasting due to its high accuracy.
+        </h2>
+      </div>
+      <div id="resource-table"></div>
+    </div>
+
+    <!-- <div
+      class="tableauPlaceholder"
+      id="viz1637568986391"
+      style="position: relative"
+    >
+      <noscript
+        ><a href="#"
+          ><img
+            alt="Sheet 1 "
+            src="https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;mo&#47;model_errors&#47;Sheet1&#47;1_rss.png"
+            style="border: none" /></a></noscript
+      ><object class="tableauViz" style="display: none">
+        <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+        <param name="embed_code_version" value="3" />
+        <param name="site_root" value="" />
+        <param name="name" value="model_errors&#47;Sheet1" />
+        <param name="tabs" value="no" />
+        <param name="toolbar" value="yes" />
+        <param
+          name="static_image"
+          value="https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;mo&#47;model_errors&#47;Sheet1&#47;1.png"
+        />
+        <param name="animate_transition" value="yes" />
+        <param name="display_static_image" value="yes" />
+        <param name="display_spinner" value="yes" />
+        <param name="display_overlay" value="yes" />
+        <param name="display_count" value="yes" />
+        <param name="language" value="en-GB" />
+        <param name="filter" value="publish=yes" />
+      </object>
+    </div>
+    <script type="text/javascript">
+      var divElement = document.getElementById("viz1637568986391");
+      var vizElement = divElement.getElementsByTagName("object")[0];
+      vizElement.style.width = "100%";
+      vizElement.style.height = divElement.offsetWidth * 0.75 + "px";
+      var scriptElement = document.createElement("script");
+      scriptElement.src =
+        "https://public.tableau.com/javascripts/api/viz_v1.js";
+      vizElement.parentNode.insertBefore(scriptElement, vizElement);
+    </script> -->
+
+    <!-- ***************************************** -->
+
+    <!-- FORM -->
+    <div class="container">
+      <div class="row">
+        <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+        <form
+          method="POST"
+          action="/ml_analysis"
+          role="form"
+          name="housingform"
+        >
+          <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col">
+                <!-- BEDROOMS -->
+                <div
+                  class="col"
+                  style="padding-left: 50px; padding-right: 50px"
+                >
+                  <div class="col">
+                    <img
+                      src="https://marketimages.s3.ap-southeast-2.amazonaws.com/bedroom.svg"
+                      alt="Bedroom"
+                    />
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="formControlRange_bed"
+                        >Number of Bedrooms</label
+                      >
+                      <input
+                        type="range"
+                        class="form-control-range_bed"
+                        min="1"
+                        max="9"
+                        id="formControlRange_bed"
+                        onInput="$('#rangeval_bed').html($(this).val())"
+                        name="bedname"
+                      />
+                      <span id="rangeval_bed">4<!-- Default value --></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <!-- BATHROOMS -->
+                <div
+                  class="col"
+                  style="padding-left: 50px; padding-right: 50px"
+                >
+                  <div class="col">
+                    <img
+                      src="https://marketimages.s3.ap-southeast-2.amazonaws.com/bathroom.svg"
+                      style="padding: 0px"
+                      alt="Bathroom"
+                    />
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="formControlRange_bath"
+                        >Number of Bathrooms</label
+                      >
+                      <input
+                        type="range"
+                        class="form-control-range_bath"
+                        min="1"
+                        max="7"
+                        id="formControlRange_bath"
+                        onInput="$('#rangeval_bath').html($(this).val())"
+                        name="bathname"
+                      />
+                      <span id="rangeval_bath">4<!-- Default value --></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w-100"></div>
+              <div class="col">
+                <!-- LAND AREA -->
+                <div class="col" style="padding: 50px">
+                  <div class="col">
+                    <img
+                      src="https://marketimages.s3.ap-southeast-2.amazonaws.com/area.svg"
+                      style="padding: 10px"
+                      alt="Land"
+                    />
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="formControlRange_land">Land Area (m2)</label>
+                      <input
+                        type="range"
+                        class="form-control-range_land"
+                        min="100"
+                        max="2500"
+                        step="100"
+                        id="formControlRange_land"
+                        onInput="$('#rangeval_land').html($(this).val())"
+                        name="landname"
+                      />
+                      <span id="rangeval_land">1200<!-- Default value --></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <!-- FLOOR AREA -->
+                <div class="col" style="padding: 50px">
+                  <div class="col">
+                    <img
+                      src="https://marketimages.s3.ap-southeast-2.amazonaws.com/floorArea.svg"
+                      style="padding: 10px"
+                      alt="Floor"
+                    />
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="formControlRange_floor"
+                        >Floor Area (m2)</label
+                      >
+                      <input
+                        type="range"
+                        class="form-control-range_floor"
+                        min="50"
+                        max="850"
+                        step="100"
+                        id="formControlRange_floor"
+                        onInput="$('#rangeval_floor').html($(this).val())"
+                        name="floorname"
+                      />
+                      <span id="rangeval_floor">450<!-- Default value --></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w-100"></div>
+              <div class="col">
+                <!-- CBD DISTANCE -->
+                <div
+                  class="col"
+                  style="padding-left: 50px; padding-right: 50px"
+                >
+                  <div class="col">
+                    <img
+                      src="https://marketimages.s3.ap-southeast-2.amazonaws.com/distance.svg"
+                      style="padding: 10px"
+                      alt="Cbd"
+                    />
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="formControlRange_cbd"
+                        >Distance to CBD (km)</label
+                      >
+                      <input
+                        type="range"
+                        class="form-control-range_cbd"
+                        min="2"
+                        max="50"
+                        step="2"
+                        id="formControlRange_cbd"
+                        onInput="$('#rangeval_cbd').html($(this).val())"
+                        name="cbdname"
+                      />
+                      <span id="rangeval_cbd">24<!-- Default value --></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <!-- BUILD YEAR -->
+                <div
+                  class="col"
+                  style="padding-left: 50px; padding-right: 50px"
+                >
+                  <div class="col">
+                    <img
+                      src="https://marketimages.s3.ap-southeast-2.amazonaws.com/buildYear.svg"
+                      alt="BuildYear"
+                    />
+                    <div class="wrapper">
+                      <label style="padding: 0px">Year Built</label>
+
+                      <select
+                        class="form-control_built"
+                        onfocus="this.size=5;"
+                        onblur="this.size=1;"
+                        onchange="this.size=1; this.blur();"
+                        name="builtname"
+                      >
+                        <option>1870</option>
+                        <option>1880</option>
+                        <option>1890</option>
+                        <option>1900</option>
+                        <option>1910</option>
+                        <option>1920</option>
+                        <option>1930</option>
+                        <option>1940</option>
+                        <option>1950</option>
+                        <option>1960</option>
+                        <option>1970</option>
+                        <option>1980</option>
+                        <option>1990</option>
+                        <option>2000</option>
+                        <option>2010</option>
+                        <option>2020</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="w-100"></div>
+              <div class="col">
+                <!-- YEAR SOLD-->
+                <div
+                  class="col"
+                  style="padding-left: 50px; padding-right: 50px"
+                >
+                  <div class="col">
+                    <img
+                      src="https://marketimages.s3.ap-southeast-2.amazonaws.com/sellYear.svg"
+                      alt="YearSold"
+                    />
+                    <div class="wrapper">
+                      <label style="padding: 0px">Year Sold</label>
+
+                      <select
+                        class="form-control_sold"
+                        onfocus="this.size=5;"
+                        onblur="this.size=1;"
+                        onchange="this.size=1; this.blur();"
+                        name="soldname"
+                      >
+                        <option>2005</option>
+                        <option>2006</option>
+                        <option>2007</option>
+                        <option>2008</option>
+                        <option>2009</option>
+                        <option>2010</option>
+                        <option>2011</option>
+                        <option>2012</option>
+                        <option>2013</option>
+                        <option>2014</option>
+                        <option>2015</option>
+                        <option>2016</option>
+                        <option>2017</option>
+                        <option>2018</option>
+                        <option>2019</option>
+                        <option>2020</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <!-- Predict Button -->
+                <div class="col" style="padding: 0px">
+                  <div class="col">
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-lg btn-block"
+                      style="margin-top: 20px"
+                    >
+                      Predict
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+        <!-- Prediction Section -->
+        <!-- <div>
+          <ul style="list-style: none">
+            <li>{{ dict.predicted_price }}</li>
+          </ul>
+        </div> -->
+        <div>
+          <h1>The predicted price is : ${{ dict.predicted_price }}</h1>
+        </div>
+
+        <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+      </div>
+    </div>
+
+    <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+
+    <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+    <!-- Import typed.min.js file from typed.js folder -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+
+    <!-- Add jquery cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Add this script for successful
+		implementation of typed.js -->
+    <script>
+      if ($(".text-slider").length == 1) {
+        var typed_strings = $(".text-slider-items").text();
+
+        var typed = new Typed(".text-slider", {
+          strings: typed_strings.split(", "),
+          typeSpeed: 40,
+          loop: true,
+          backDelay: 1000,
+          backSpeed: 10,
+        });
+      }
+    </script>
+
+    <!-- ***************************************** -->
+
+    <!--D3 cdn-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <!-- Our JavaScript -->
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/machine_learning.js') }}"
+    ></script>
+
+    <!-- API key -->
+    <!-- <script type="text/javascript" src="../static/js/config.js"></script> -->
+
+    <!-- Leaflet JS-->
+    <!-- <script
+      src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+      integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+      crossorigin=""
+    ></script> -->
+  </body>
+</html>

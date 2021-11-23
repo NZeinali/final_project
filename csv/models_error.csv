@@ -1,0 +1,7 @@
+Model,Training Score,Testing Score
+RandomForestRegressor,0.956,0.69
+MLPRegressor,0.702,0.674
+LinearRegression,0.565,0.565
+KNeighborsRegressor,0.708,0.645
+Support Vector Regression (SVR),0.688,0.682
+DecisionTreeRegressor,0.999,0.376

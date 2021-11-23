@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Market Analysis</title>
+
+    <!-- Our CSS stylesheet-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <!-- Bootstrap stylesheet -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!-- GRANIM -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/granim/2.0.0/granim.js"></script>
+
+    <!-- Remove favicon.ico error -->
+    <link rel="shortcut icon" href="#" />
+    <!-- Leaflet CSS -->
+    <!-- <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+      integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+      crossorigin=""
+    /> -->
+    <!-- Tabulator -->
+    <!-- <link
+      href="https://unpkg.com/tabulator-tables@5.0.0/dist/css/tabulator.min.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/tabulator-tables@5.0.0/dist/js/tabulator.min.js"
+    ></script> -->
+  </head>
+  <!-- ######################################################################### -->
+  <body>
+    <!-- Granim Section / HEADER -->
+
+    <div class="canvas-interactive-wrapper">
+      <canvas id="canvas-interactive"></canvas>
+      <div class="cta-wrapper">
+        <div class="container-fluid">
+          <a href="/" id="default-state-cta">HOME PAGE</a>
+          <a href="/ml_analysis" id="violet-state-cta">MACHINE LEARNING</a>
+          <a href="/leaflet" id="orange-state-cta">MAP</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ######################################################################### -->
+    <!-- Section for the Histogram plot (land size)  -->
+
+    <div class="container" style="padding-bottom: 100px;">
+      <div>
+        <h1 style="text-align: center; padding: 50px">
+          Popular house size: What is the most popular size of Perth property lot?
+        </h1>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-8">
+          <div id="hist_landsize"></div>
+        </div>
+
+        <div class="col-4" style="font-size: 24px">
+          <p>
+            The popular land size of Western Australian homes is 700-750m2.
+            Second place equally belongs to 500-550m2 & 650-700m2.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ######################################################################### -->
+    <!-- Section for the Price Variation per Year  -->
+    <div>
+      <h1 style="text-align: center; padding: 50px">
+        Average property price variation (2005-2020)
+      </h1>
+    </div>
+    <div class='tableauPlaceholder; container' id='viz1637581070716' style='position: relative'><noscript><a href='#'><img alt='Sheet 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;Priceperyear&#47;Sheet1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Priceperyear&#47;Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;Priceperyear&#47;Sheet1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-GB' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1637581070716');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    <!-- ######################################################################### -->
+    <!-- Section for the Bar plot (Age of Property Analysis)  -->
+
+
+    <div class="card container" style="width: 800px; padding-top: 50px; padding-bottom: 50px;" >
+      <div class="card-body">
+        <p class="card-text"><h1> How age affects house prices?</h1></p>
+      </div>
+      <img class="card-img-top" src="https://marketimages.s3.ap-southeast-2.amazonaws.com/age.png" alt="property Age">
+
+    </div>
+
+
+
+    <div class="container-fluid" style="padding-bottom: 50px;">
+      <div class="row">
+        <div class="col-4">
+          <p style="text-align: justify; padding: 50px; font-size: 30px;">Accroding to the depicted relationship between Perth dwellings age and their market value, newer homes appraise at a higher value. The average price per land area increases from nearly 1000$/m2 for properties built before 1990 to 1400$/m2 for those built after 2015.</p>
+        </div>
+        <div class="col-8">
+          <div class="container"  id="age_plotly"></div>
+        </div>
+      </div>
+
+    </div>
+    <!-- ######################################################################### -->
+    <!-- Section for the Multi axis Bar plot (Suburb Analysis)  -->
+    <div class="card container" style="width: 800px; padding-top: 50px; padding-bottom: 50px;" >
+      <div class="card-body">
+        <p class="card-text"><h1> Perth Suburb Profiles</h1></p>
+      </div>
+      <img class="card-img-top" src="https://marketimages.s3.ap-southeast-2.amazonaws.com/perthSuburbs.png" alt="property Age">
+
+    </div> 
+
+
+    <div class="container-fluid">
+      <div style="text-align: center">
+        <h2 >Cottesloe is Perth's most expensive suburb. Swanbourne ranked the second most expensive suburb in total price of dwellings sold between 2005 and 2020.</h2>
+      </div>
+      <div id="suburb_plotly"></div>
+
+  </div>
+
+    <!-- ######################################################################### -->
+
+    <!-- Distance to School Section -->
+    <img class="center" style="padding-top: 200px; " src="https://marketimages.s3.ap-southeast-2.amazonaws.com/school.png" alt="school">
+    <div class="container" style="padding: 100px;">
+    <div class="row " style="margin-top: 50px; margin-bottom: 50px; margin-left: 50px; margin-right: 50px">
+      <div class="col">
+        <h1>Top ten Perth schools is selected to investigate whether or not the property distance to school affects housing proces.</h1>
+        <div class="well">
+          <h4>Top Perth Schools</h4>
+          <select id="selSchool"></select>
+        </div>
+      </div>
+ 
+    </div>
+    <div id="scatter_school" class="container"></div>
+    <h4>Apparently, there is no significant relationship between housing price and distance to school.</h4>
+  </div>
+    <!-- ######################################################################### -->
+
+    <!--D3 cdn-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+    <!-- Plotly -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <!-- Our JavaScript -->
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/market_analysis.js') }}"
+    ></script>
+
+    <!-- Leaflet JS-->
+    <script
+      src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+      integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+      crossorigin=""
+    ></script>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
