@@ -1,15 +1,9 @@
 from flask import Flask, json, jsonify, render_template, request, redirect
-from sqlalchemy.ext.automap import automap_base
-import numpy as np
-from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func
-from config import password
 import os
 from flask_sqlalchemy import SQLAlchemy
 import requests
 import csv
 import joblib
-from sklearn.preprocessing import StandardScaler
 
 
 #################################################
