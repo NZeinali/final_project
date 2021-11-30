@@ -30,13 +30,13 @@ td {
 .canvas-interactive-wrapper .cta-wrapper a {
   position: relative;
   display: inline-block;
-  padding: 20px 40px;
+  padding: 20px 20px;
   border: solid 1px transparent;
   margin-right: 100px;
   z-index: 1;
   text-decoration: none;
   color: #222;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   transition: border 0.3s;
 }
