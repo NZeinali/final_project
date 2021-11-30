@@ -53,7 +53,8 @@
     <!-- TYPED.js -->
     <h1 style="margin: 20px">
       <span class="text-slider-items">
-        Perth property market analysis!, Machine learning for home price forecast!
+        Perth property market analysis!, Machine learning for home price
+        forecast!
       </span>
       <strong class="text-slider"></strong>
     </h1>
@@ -84,8 +85,7 @@
           <br />
           <br />
           RandomForestRegression is among the machine learning algorithms that
-          has given the highest test scores. Therefore, this model is used in
-          house price forcasting due to its high accuracy.
+          has given the highest test scores.
         </h2>
       </div>
       <div id="resource-table"></div>
@@ -175,7 +175,7 @@
                         onInput="$('#rangeval_bed').html($(this).val())"
                         name="bedname"
                       />
-                      <span id="rangeval_bed">4<!-- Default value --></span>
+                      <span id="rangeval_bed">5<!-- Default value --></span>
                     </div>
                   </div>
                 </div>
@@ -236,7 +236,7 @@
                         onInput="$('#rangeval_land').html($(this).val())"
                         name="landname"
                       />
-                      <span id="rangeval_land">1200<!-- Default value --></span>
+                      <span id="rangeval_land">1300<!-- Default value --></span>
                     </div>
                   </div>
                 </div>
@@ -300,7 +300,7 @@
                         onInput="$('#rangeval_cbd').html($(this).val())"
                         name="cbdname"
                       />
-                      <span id="rangeval_cbd">24<!-- Default value --></span>
+                      <span id="rangeval_cbd">26<!-- Default value --></span>
                     </div>
                   </div>
                 </div>
@@ -411,6 +411,14 @@
         <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
         <!-- Prediction Section -->
         <div>
+          <p>
+            The requested features are as follows: <br />Number of Bedrooms: {{
+            dict.Bedrooms }} | Number of Bathrooms: {{ dict.Bathrooms }} | Land
+            Size: {{ dict.Land }} m2 | Floor Size: {{ dict.Floor }} m2 |
+            Distance to CBD: {{ dict.Dist_CBD }} km | Year Built: {{
+            dict.Year_Built }} | Year Sold: {{ dict.Year_Sold }}
+          </p>
+          <br />
           <h1>The predicted price is : ${{ dict.predicted_price }}</h1>
         </div>
 

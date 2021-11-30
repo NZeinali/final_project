@@ -46,7 +46,7 @@ var granimInstance = new Granim({
 
 // function runEnter() {
 //   // Prevent the page from refreshing
-//   d3.event.preventDefault();
+// d3.event.preventDefault();
 
 //   var bedrooms = d3.select("#inputbedrooms").node().value;
 //   console.log(bedrooms);
@@ -81,6 +81,11 @@ var granimInstance = new Granim({
 // //   .catch(function (error) {
 // //     console.log(error);
 // //   });
+// ************************************************************************************************
+
+
+
+// ************************************************************************************************
 
 d3.json("/modelerror")
   .then((modelData) => {

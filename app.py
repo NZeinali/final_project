@@ -94,7 +94,9 @@ def send():
             prediction.reshape(-1, 1))
 
         price_predicted = int(round(descaled_prediction[0][0]/1000)*1000)
-        prediction_dict = {"predicted_price": price_predicted}
+        prediction_dict = {"predicted_price": price_predicted, "Bedrooms": bed,
+                           "Bathrooms": bath, "Land": land, "Floor": floor, "Dist_CBD": distCBD,
+                           "Year_Built": buildYear, "Year_Sold": sellingYear}
     else:
         prediction_dict = {"prediction_price": "hit predict"}
     return render_template("machine_learning.html", dict=prediction_dict)
