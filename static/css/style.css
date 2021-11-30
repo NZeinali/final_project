@@ -30,7 +30,7 @@ td {
 .canvas-interactive-wrapper .cta-wrapper a {
   position: relative;
   display: inline-block;
-  padding: 20px 120px;
+  padding: 20px 40px;
   border: solid 1px transparent;
   margin-right: 100px;
   z-index: 1;

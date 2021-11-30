@@ -1,3 +1,36 @@
+// *************************************
+// GRANIM.JS
+// *************************************
+var granimInstance = new Granim({
+  element: "#canvas-interactive",
+  name: "interactive-gradient",
+  elToSetClassOn: ".canvas-interactive-wrapper",
+  direction: "diagonal",
+  isPausedWhenNotInView: true,
+  stateTransitionSpeed: 500,
+  states: {
+    "default-state": {
+      gradients: [
+        ["#B3FFAB", "#12FFF7"],
+        ["#ADD100", "#7B920A"],
+        ["#1A2980", "#26D0CE"],
+      ],
+      transitionSpeed: 10000,
+    },
+    "violet-state": {
+      gradients: [
+        ["#9D50BB", "#6E48AA"],
+        ["#4776E6", "#8E54E9"],
+      ],
+      transitionSpeed: 2000,
+    },
+    "orange-state": {
+      gradients: [["#FF4E50", "#F9D423"]],
+      loop: false,
+    },
+  },
+});
+
 d3.json("/avgprice")
   .then((houseData) => {
     // Convert string to number
@@ -52,7 +85,6 @@ d3.json("/avgprice")
 
     // Grabbing our GeoJSON data..
     d3.json(geodata).then(function (data) {
-      
       // Editing geojson by adding price item
       for (var i = 0; i < data.features.length; i++) {
         for (var j = 0; j < housePrice.length; j++) {
@@ -61,8 +93,6 @@ d3.json("/avgprice")
           }
         }
       }
-
-
 
       // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
       geojson = L.choropleth(data, {
