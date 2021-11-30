@@ -90,9 +90,10 @@ def send():
 
         scaled_userinput = loadedxScaler.transform(user_input)
         prediction = loadedModel.predict(scaled_userinput)
-        descaled_prediction = loadedyScaler.inverse_transform(prediction)
+        descaled_prediction = loadedyScaler.inverse_transform(
+            prediction.reshape(-1, 1))
 
-        price_predicted = int(round(descaled_prediction[0]/1000)*1000)
+        price_predicted = int(round(descaled_prediction[0][0]/1000)*1000)
         prediction_dict = {"predicted_price": price_predicted}
     else:
         prediction_dict = {"prediction_price": "hit predict"}
