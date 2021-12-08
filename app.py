@@ -25,17 +25,6 @@ print(loadedxScaler)
 print(loadedyScaler)
 
 
-# uri = os.getenv("DATABASE_URL", "")
-# if uri.startswith("postgres://"):
-#     uri = uri.replace("postgres://", "postgresql://", 1)
-# app.config['SQLALCHEMY_DATABASE_URI'] = uri or "sqlite:///db.sqlite"
-
-# # Remove tracking modifications
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# db = SQLAlchemy(app)
-
-
 #################################################
 # Flask Routes
 #################################################
@@ -129,7 +118,7 @@ def leaflet_page():
 
 @app.route("/maindata")
 def maindata_func():
-    CSV_URL = 'https://perth-housing.s3.ap-southeast-2.amazonaws.com/cleaned_perth_market.csv'
+    CSV_URL = 'https://perthhousingforcast.s3.ap-southeast-2.amazonaws.com/cleaned_perth_market.csv'
 
     with requests.Session() as s:
         download = s.get(CSV_URL)
@@ -185,7 +174,7 @@ def maindata_func():
 @app.route("/avgprice")
 def avgPrice_func():
 
-    CSV_URL = 'https://perth-housing.s3.ap-southeast-2.amazonaws.com/avg_price_suburb.csv'
+    CSV_URL = 'https://perthhousingforcast.s3.ap-southeast-2.amazonaws.com/avg_price_suburb.csv'
 
     with requests.Session() as s:
         download = s.get(CSV_URL)
@@ -216,7 +205,7 @@ def avgPrice_func():
 def geo_func():
 
     geo_data = requests.get(
-        "http://perth-housing.s3.ap-southeast-2.amazonaws.com/suburb-10-wa.geojson")
+        "https://perthhousingforcast.s3.ap-southeast-2.amazonaws.com/suburb-10-wa.geojson")
 
     return jsonify(geo_data.json())
 
@@ -225,7 +214,7 @@ def geo_func():
 
 @app.route("/modelerror")
 def machinelearning_model_func():
-    CSV_URL = 'https://perth-housing.s3.ap-southeast-2.amazonaws.com/models_error.csv'
+    CSV_URL = 'https://perthhousingforcast.s3.ap-southeast-2.amazonaws.com/models_error.csv'
 
     with requests.Session() as s:
         download = s.get(CSV_URL)
